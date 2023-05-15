@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>Create an Order Page</title>
+</head>
+<body>
+<h2>Create an Order</h2>
+<form action="#" th:action="@{/createOrder}" th:object="${orders}" method="post">
+    <label>Product Id </label><input type="text" th:field="*{productid}"/><br/>
+    <label>Email </label><input type="text" th:field="*{emailid}"/><br/>
+    <label>Date </label><input type="date" th:field="*{orderplaced}"/><br/>
+    <input type="submit" value="Create an Order"/>
+</form>
+<p th:text="${categoryInfoMessage}"></p>
+<br/>
+<a th:href="@{/customerHome}">Back</a>
+</body>
+</html>

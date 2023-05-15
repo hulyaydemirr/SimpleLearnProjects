@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>View Category Page</title>
+</head>
+<body>
+<th:block th:if="${#lists.isEmpty(category)}">
+    <p th:text="${categoryInfo}"></p>
+</th:block>
+<th:block th:unless="${#lists.isEmpty(category)}">
+    <table border="1">
+        <tr>
+            <th>CategoryId</th>
+            <th>Category Name</th>
+        </tr>
+        <tr th:each="cc:${category}">
+            <td th:text="${cc.cId}"></td>
+            <td th:text="${cc.categoryName}"></td>
+        </tr>
+    </table>
+    <p th:text="${categoryInfo}"></p>
+</th:block>
+
+<br/>
+<a th:href="@{/adminHome}">Back</a>
+</body>
+</html>

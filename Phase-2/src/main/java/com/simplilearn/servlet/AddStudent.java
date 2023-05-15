@@ -1,0 +1,65 @@
+package com.simplilearn.servlet;
+
+import com.simplilearn.configuration.DatabaseConfiguration;
+import com.simplilearn.entity.Student;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+@WebServlet ("/addStudent")
+public class AddStudent extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AddStudent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		String name = request.getParameter("fname");
+		String lname = request.getParameter("lname");
+
+		SessionFactory sf  = DatabaseConfiguration.getSessionFactory();
+		Session session = sf.openSession();
+
+		Transaction tx = session.beginTransaction();
+
+		Student student = new Student();
+		student.setFname(name);
+		student.setLname(lname);
+
+		session.save(student);
+		tx.commit();
+		session.close();
+
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/viewStudent.jsp");
+		dispatcher.forward(request, response);
+	}
+
+}

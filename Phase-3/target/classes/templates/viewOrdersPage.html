@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>View Category Page</title>
+</head>
+<body>
+<th:block th:if="${#lists.isEmpty(orders)}">
+    <p th:text="${orderInfo}"></p>
+</th:block>
+<th:block th:unless="${#lists.isEmpty(orders)}">
+    <table border="1">
+        <tr>
+            <th>Order Id</th>
+            <th>Order Placed</th>
+            <th>Product Id</th>
+        </tr>
+        <tr th:each="cc:${orders}">
+            <td th:text="${cc.orderId}"></td>
+            <td th:text="${cc.orderplaced}"></td>
+            <td th:text="${cc.productid}"></td>
+        </tr>
+    </table>
+    <p th:text="${orderInfo}"></p>
+</th:block>
+
+<br/>
+<a th:href="@{/adminHome}">Back</a>
+</body>
+</html>
